@@ -1,0 +1,23 @@
+int led = D7;
+int LightSensor = A1;
+
+void setup() {
+    pinMode(led, OUTPUT);
+}
+
+void loop() {
+    digitalWrite(led, HIGH);
+    
+    int LightData = analogRead(LightSensor);
+    if(LightData >= 300){
+        Particle.publish("sunLight_on", "enough light");
+    }
+    else{
+        Particle.publish("sunLight_off", "need light");
+    }
+    delay(10000); //wait for 10 seconds
+    
+    
+    digitalWrite(led,LOW);
+    delay(10000); //wait for 10 seconds
+}
